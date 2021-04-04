@@ -9,6 +9,7 @@ import javafx.scene.paint.Color
 import tornadofx.*
 import views.logic.Contact
 import views.logic.Settings
+import views.views.MailSender
 import javax.xml.crypto.Data
 
 class FindContactView :View() {
@@ -42,7 +43,10 @@ class FindContactView :View() {
                 item ("Copia").action {
                     Clipboard.getSystemClipboard().setContent(mapOf(DataFormat.PLAIN_TEXT to selectedValue.toString()))
                 }
-                item ("Invia Mail").action {  }
+                item ("Invia Mail").action {
+                    settings.tempDestinationAddress.set(selectedItem?.mailAddress)
+                    openInternalWindow<MailSender>()
+                }
             }
         }
         button ("Esci"){

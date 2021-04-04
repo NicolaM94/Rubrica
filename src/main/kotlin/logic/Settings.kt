@@ -18,6 +18,8 @@ class Settings :Controller() {
     val mailAddress = SimpleStringProperty()
     val mailPwd = SimpleStringProperty()
 
+    val tempDestinationAddress = SimpleStringProperty()
+
 
 
 
