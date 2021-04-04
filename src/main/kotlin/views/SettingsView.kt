@@ -30,12 +30,14 @@ class SettingsView :View() {
                 val sourcePath = Path(settings.addressesFile.value)
                 var destinationPath = Path("")
                 if (System.getProperty("os.name") == "Windows") {
-                    destinationPath = Path(addressesPath.value+"\\settings.txt")
+                    destinationPath = Path(addressesPath.value+"\\addresses.txt")
                 } else {
-                    destinationPath = Path(addressesPath.value+"/settings.txt")
+                    destinationPath = Path(addressesPath.value+"/addresses.txt")
                 }
+                println("Destination path: $destinationPath")
                 Files.move(sourcePath,destinationPath,StandardCopyOption.REPLACE_EXISTING)
-                settings.addressesFile.set(addressesPath.value)
+                settings.addressesFile.set(destinationPath.toString())
+                println("Addresses file location changed to: ${settings.addressesFile.value}")
                 }
             }
         }

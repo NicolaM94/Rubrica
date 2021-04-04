@@ -24,9 +24,11 @@ class Engine :App(MainView::class) {
                     settings.addressesFile.set("${userHome}\\SmartAddresses\\addresses.txt")
                     settings.settingsFile.set("${userHome}\\SmartAddresses\\settings.txt")
                 } else {
-                    settings.projectFolder.set("${userHome}\\SmartAddresses\\")
-                    settings.addressesFile.set("${userHome}\\SmartAddresses\\addresses.txt")
-                    settings.settingsFile.set("${userHome}\\SmartAddresses\\settings.txt")
+                    with (File("${userHome}\\SmartAddresses\\settings.txt").readLines()) {
+                        settings.projectFolder.set(this[1])
+                        settings.addressesFile.set(this[2])
+                        settings.settingsFile.set(this[3])
+                    }
                     with(File(settings.addressesFile.value)) {
                         val reader = this.readLines()
                         reader.forEach {
@@ -44,9 +46,11 @@ class Engine :App(MainView::class) {
                     settings.addressesFile.set("/${userHome}/SmartAddresses/addresses.txt")
                     settings.settingsFile.set("/${userHome}/SmartAddresses/settings.txt")
                 } else {
-                    settings.projectFolder.set("/${userHome}/SmartAddresses")
-                    settings.addressesFile.set("/${userHome}/SmartAddresses/addresses.txt")
-                    settings.settingsFile.set("/${userHome}/SmartAddresses/settings.txt")
+                    with (File("/${userHome}/SmartAddresses/settings.txt").readLines()) {
+                        settings.projectFolder.set(this[1])
+                        settings.addressesFile.set(this[2])
+                        settings.settingsFile.set(this[3])
+                    }
                     with(File(settings.addressesFile.value)) {
                         val reader = this.readLines()
                         reader.forEach {
