@@ -16,6 +16,19 @@ class SettingsView :View() {
 
     val settings :Settings by inject()
     val addressesPath = SimpleStringProperty()
+    val smtpServer = SimpleStringProperty()
+    val smtpPort = SimpleStringProperty()
+    val mailAddress = SimpleStringProperty()
+    val pwdAddress = SimpleStringProperty()
+
+    init {
+        with(File(settings.settingsFile.value).readLines()) {
+            smtpServer.set(this[4])
+            smtpPort.set(this[5])
+            mailAddress.set(this[6])
+            pwdAddress.set(this[7])
+        }
+    }
 
     @ExperimentalPathApi
     override val root = form {
@@ -43,12 +56,21 @@ class SettingsView :View() {
         }
 
         fieldset ("Impostazioni server") {
-            field ("Server SMTP") {}
-            field ("Porta SMTP") {}
-            field ("Indirizzo mail") {  }
-            field ("Password mail") { }
+            field ("Server SMTP") {textfield(smtpServer).promptText = "smtp.gmail.com"}
+            field ("Porta SMTP") {textfield(smtpPort).promptText = "456"}
+            field ("Indirizzo mail") { textfield(mailAddress).promptText = "mario.rossi@mail.com" }
+            field ("Password mail") { passwordfield (pwdAddress).promptText = "SuperMari02354"}
         }
 
-        button ("Esci").action { replaceWith<MainView>() }
+        button ("Esci") {
+            style { setPrefWidth(150.0) }
+            action {
+                settings.smtpAddress.set(smtpServer.value)
+                settings.smtpPort.set(smtpPort.value)
+                settings.mailAddress.set(mailAddress.value)
+                settings.mailPwd.set(pwdAddress.value)
+                replaceWith<MainView>()
+            }
+        }
     }
 }

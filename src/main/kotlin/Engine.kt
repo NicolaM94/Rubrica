@@ -86,6 +86,10 @@ class Engine :App(MainView::class) {
                 |${settings.projectFolder.value}
                 |${settings.addressesFile.value}
                 |${settings.settingsFile.value}
+                |${settings.smtpAddress.value}
+                |${settings.smtpPort.value}
+                |${settings.mailAddress.value}
+                |${settings.mailPwd.value}
             """.trimMargin())
         }
         super.stop()

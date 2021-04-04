@@ -13,6 +13,11 @@ class Settings :Controller() {
     val settingsFile = SimpleStringProperty()
     val contactsList  = observableListOf<Contact>()
 
+    val smtpAddress = SimpleStringProperty()
+    val smtpPort = SimpleStringProperty()
+    val mailAddress = SimpleStringProperty()
+    val mailPwd = SimpleStringProperty()
+
 
 
 
